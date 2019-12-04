@@ -1,22 +1,56 @@
-.App {
-  text-align: center;
+body, html, #root {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
 }
 
-.App-logo {
-  height: 40vmin;
+div { 
+    border-radius: 4px;
+    padding: 16px;
+}
+.container{
+    position: relative;
+    height: 80%;
+    width: 100%;
+    padding: 0px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.inputContainer{
+    top: 50%;
+    left: 50%;
+    transform: translate(8px,-100%);
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    border: 1px solid black;
 }
 
-.App-link {
-  color: #09d3ac;
+.containerAutomato{
+    position: absolute;
+    height: 250px;
+    min-width: 200px;
+    border: 1px solid black;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,16px);
+    overflow-Y: scroll;
+}
+
+.resultContainer{
+    height: 20px;
+    margin-top: 16px;
+}
+
+.resultContainer p{
+    margin: 0px;
+}
+
+.fileContainer{
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-100% - 8px),-100%);
+    width: 400px;
+    height: 200px;
+    position: relative;
+    border: 1px solid black;
 }
