@@ -34,7 +34,7 @@ function App() {
   }
   
   const renderFunction = f => (
-    <p>{`(${f.state},${f.symbol},${f.destiny})`}</p>
+    <p>{`(${f.state},${f.symbol}) = ${f.destiny}`}</p>
   )
 
   const renderAutomato = () => (
@@ -44,10 +44,24 @@ function App() {
       <p>{`estados finais: {${afd.finalStates}}`}</p>
       <p>{`simbolos: ${afd.symbols}`}</p>
       <p>{`estado incical: ${afd.initialState}`}</p>
-      <p>transições (estado,simbolo, destino): </p>
+      <p>transições: </p>
       {afd.functions.map(f => renderFunction(f))}
     </>
   );
+
+  const renderResult = () => {
+    const response = util.resolve(afd,word.trim());
+
+    if(response.result)
+      return <p>Palavra aceita</p>
+    
+    return (
+      <>
+        <p>Palavra não aceita</p>
+        <p>{response.message}</p>
+      </>
+    )
+  }
 
   return (
     <div className="container">
@@ -67,8 +81,7 @@ function App() {
             value={word}
             onChange={(event) => setWord(event.target.value)}
           />
-          {(afd && word) 
-          && <p>{`Palavra ${util.resolve(afd,word.trim()) ? "aceita" : "rejeitada"}`}</p>}
+          {(afd && word) && renderResult()}
         </div>
 
       <div className="containerAutomato">

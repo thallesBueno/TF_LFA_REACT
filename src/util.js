@@ -1,15 +1,15 @@
 const resolve = (m,word) => {
-    console.log(m);
     if(!m){
         return false;
     }
 
     let actualState = m.initialState;
     let error = false;
+    let message = '';
 
     for(let symbol of word){
         if(!m.symbols.includes(symbol)){
-            console.log(`simbolo "${symbol}" não pertence ao alfabeto`);
+            message = (`simbolo "${symbol}" não pertence ao alfabeto`);
             error = true;
             break;
         }
@@ -17,13 +17,13 @@ const resolve = (m,word) => {
         const possibleFunctions = m.functions.filter(f => f.state === actualState && f.symbol === symbol);
 
         if(possibleFunctions.length === 0){
-            console.log(`não existe transição com o simbolo "${symbol}" no estado "${actualState}"`);
+            message = (`não existe transição com o simbolo "${symbol}" no estado "${actualState}"`);
             error = true;
             break;
         }
         
         if(possibleFunctions.length > 1){
-            console.log('automato não é deterministico');
+            message = ('automato não é deterministico');
             error = true;
             break;
         }
@@ -33,15 +33,14 @@ const resolve = (m,word) => {
     }
 
     if(!error && m.finalStates.includes(actualState)){
-        console.log(`palavra "${word}" aceita`);
-        return true;
+        return {result: true};
     }else{
         if(!error)
         {
-            console.log(`estado "${actualState}" não é um estado final`);
+            message += (`\n estado "${actualState}" não é um estado final`);
         }
-        console.log(`palavra "${word}" não aceita`);
-        return false;
+        
+        return {result: false, message};
     }
  };
 
